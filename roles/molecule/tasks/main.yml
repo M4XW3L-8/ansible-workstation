@@ -1,0 +1,7 @@
+---
+# tasks file for molecule
+- name: install molecule
+  pip:
+    name:  molecule
+    state: present
+

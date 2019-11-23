@@ -1,0 +1,31 @@
+---
+
+- name: establish keepass repo
+  when: ansible_distribution == 'Ubuntu'
+  become: true
+  apt_repository:
+    repo: 'ppa:jtaylor/keepass'
+    filename: keepass
+    state: present
+
+- name: establish keepass plugin repo
+  when:
+    - ansible_distribution == 'Ubuntu'
+    - keepass_plugins is defined
+    - keepass_plugins | length > 0
+  become: true
+  apt_repository:
+    repo: 'ppa:dlech/keepass2-plugins'
+    filename: keepass-plugins
+    state: present
+
+- name: establish keepass repo
+  when:
+    - ansible_distribution == 'Debian'
+  become: true
+  apt_repository:
+    repo: "{{ item }}"
+    state: present
+  loop:
+    - "deb http://ftp.debian.org/debian/ stable main contrib non-free"
+    - "deb http://ftp.de.debian.org/debian {{ ansible_distribution_release }} main"

@@ -1,0 +1,17 @@
+---
+# tasks file for signal
+- name: add key
+  apt_key: 
+    url: https://updates.signal.org/desktop/apt/keys.asc
+
+- name: add repo
+  apt_repository:
+    repo: deb [arch=amd64] https://updates.signal.org/desktop/apt xenial main
+    state: present
+    filename: signal-xenial
+
+- name: install
+  apt:
+    name: signal
+    state: present
+    update_cache: yes

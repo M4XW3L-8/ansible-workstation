@@ -1,0 +1,6 @@
+---
+# tasks file for vagrant
+- name: install Debian packages
+  apt:
+    deb: "{{ item }}"
+  loop: "{{ vagrant_packages}}"

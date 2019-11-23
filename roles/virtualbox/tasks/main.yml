@@ -1,0 +1,21 @@
+---
+# tasks file for virtualbox
+- name: add key
+  apt_key: 
+    url: '{{ item }}'
+    state: present
+  with_items:
+    - "https://www.virtualbox.org/download/oracle_vbox.asc"
+    - "https://www.virtualbox.org/download/oracle_vbox_2016.asc"
+
+
+- name: add repo
+  apt_repository:
+    repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
+    state: present
+    filename: virtualbox
+
+- name: install 
+  apt: 
+    name: virtualbox-{{ virtualbox_version }}
+    state: present

@@ -1,0 +1,31 @@
+---
+
+- name: load platform vars
+  include_tasks: "{{ item }}"
+  loop: "{{ query('first_found', params, errors='ignore') }}"
+  vars:
+    params:
+      files:
+        - "{{ ansible_distribution }}-{{ ansible_distribution_release }}.yml"
+        - "{{ ansible_distribution }}.yml"
+        - "{{ ansible_os_family }}.yml"
+        - "{{ ansible_system }}.yml"
+      paths:
+        - '{{ role_path }}/tasks/platform/pre-install/'
+
+- name: establish keepass2
+  become: true
+  package:
+    name: keepass2
+    state: present
+  tags: install
+
+- name: establish plugins
+  when:
+    - keepass_plugins is defined
+    - keepass_plugins | length > 0
+  become: true
+  package:
+    name: "{{ keepass_plugins }}"
+    state: present
+  tags: install

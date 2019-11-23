@@ -1,0 +1,119 @@
+---
+# tasks file for docker
+
+- name: paquet prerequis
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+       - apt-transport-https 
+       - ca-certificates
+       - curl
+       - gnupg2
+       - libpam-systemd
+       - software-properties-common
+       - python-pip
+
+- name: add key docker with proxy
+  environment:
+    http_proxy: "{{ proxy }}"
+    https_proxy: "{{ proxy }}"
+  apt_key: 
+    url: https://download.docker.com/linux/ubuntu/gpg
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    state: present
+  when: (proxy is defined) and (proxy|length >2)
+
+- name: add key docker 
+  apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    id: 9DC858229FC7DD38854AE2D88D81803C0EBFCD88
+    state: present
+  when: (proxy is undefined) or ( proxy|length <3 )
+
+- name: add repos docker
+  apt_repository:
+    repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable
+    state: present
+    filename: docker
+
+- name: paquet docker
+  apt:
+    name: "{{ packages }}"
+    state: present
+    update_cache: yes
+  vars:
+    packages:
+       - python-docker
+       - docker-ce
+
+- name: install docker  
+  pip:
+    name: docker
+  environment:
+    HTTP_PROXY: '{{ proxy }}'
+    HTTPS_PROXY: '{{ proxy }}'
+  when: (proxy is defined) and (proxy|length >2)
+
+- name: install docker 
+  pip:
+    name: docker
+  when: (proxy is undefined) or ( proxy|length <3 )
+
+
+- name: conf proxy for docker
+  blockinfile:
+    path: /etc/systemd/system/docker.service.d/http-proxy.conf
+    regexp: '^'
+    block: |
+      [Service]
+      Environment="HTTP_PROXY= "{{ proxy }}"" "HTTPS_PROXY= "{{ proxy }}"" "NO_PROXY= registry.qwant.ninja,git.qwant.ninja"
+    state: present
+    create: true
+  when: (proxy is defined) and ( proxy|length > 0)
+  notify:
+    - reload systemd
+    - docker restart
+
+- name: configure docker daemon.json
+  template:
+    src: daemon.json.j2
+    dest: /etc/docker/daemon.json
+    mode: 0400
+    owner: root
+    group: root
+  notify:
+    - reload systemd
+    - docker restart
+
+- name: create data docker directory
+  file:
+    path: "{{ docker_path_data }}"
+    state: directory
+    mode: 0600
+    owner: root
+    group: root
+
+- name: delete binary for update docker-compose
+  file:
+    path: "/usr/bin/docker-compose"
+    state: absent
+  tags: 
+    - never
+    - update compose
+
+- name: Force  Update binary
+  environment:
+    http_proxy: "{{ proxy }}" 
+    https_proxy: "{{ proxy }}"
+  get_url:
+    url: "https://github.com/docker/compose/releases/download/{{ docker_compose_version }}/docker-compose-Linux-x86_64"
+    dest: /usr/bin/docker-compose
+    mode: 0755
+    owner: root
+    group: root
+  tags: 
+    - never
+    - update compose  

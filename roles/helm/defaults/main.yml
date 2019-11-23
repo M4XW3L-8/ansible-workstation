@@ -1,0 +1,5 @@
+---
+# defaults file for helm
+helm_version: "3.0.0"
+helm_dest: /usr/local/bin/
+

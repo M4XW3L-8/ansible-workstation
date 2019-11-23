@@ -1,0 +1,10 @@
+---
+# tasks file for osbproject
+- name: add ppa 
+  apt_repository:
+    repo: ppa:obsproject/obs-studio
+
+- name: Install obs-studio
+  apt:
+    name: obs-studio
+    update_cache: yes

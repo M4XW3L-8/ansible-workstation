@@ -1,0 +1,11 @@
+---
+# handlers file for docker
+- name: reload systemd
+  systemd:
+    daemon-reload: yes
+
+- name: docker restart
+  systemd:
+    name: docker
+    state: restarted
+

@@ -1,0 +1,22 @@
+---
+#############
+#TEST
+#############
+all:
+  vars:
+    dns: 8.8.8.8
+    #dns: 1.1.1.1
+    #dns: 208.67.222.222 
+    keepass_plugins:
+      - keepass2-plugin-tray-icon
+
+
+  children:
+    vagrant:
+      hosts:
+        workstation:
+          ansible_connection: ssh
+          ansible_ssh_user: vagrant
+          ansible_host: 127.0.0.1
+          ansible_ssh_port: 2222
+          ansible_ssh_private_key_file: ~/vagrant/.vagrant/machines/default/virtualbox/private_key

@@ -1,0 +1,43 @@
+---
+# tasks file for helm
+- name: test helm install
+  stat:
+    path: "{{ helm_dest }}"
+  register: helm_present
+  changed_when: false 
+  tags:
+    - helm
+
+- name: download binary helm
+  get_url:
+     url: "https://get.helm.sh/helm-v{{ helm_version }}-linux-amd64.tar.gz"
+     dest: /tmp/
+     mode: 0644
+  tags:
+    - helm
+
+- name: unarchive helm
+  unarchive:
+    src: /tmp/helm-v{{ helm_version }}-linux-amd64.tar.gz
+    dest: /tmp/
+    remote_src: yes
+  tags:
+    - helm
+
+
+- name: copy helm
+  copy:
+    src: /tmp/linux-amd64/helm
+    dest: "{{ helm_dest }}"
+    mode: 0755
+    remote_src: yes
+  tags:
+    - helm
+
+
+- name: install helm secret
+  shell: helm plugin install https://github.com/futuresimple/helm-secrets
+  when: helm_present.stat.exists == False
+  tags:
+    - helm
+

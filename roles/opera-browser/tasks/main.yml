@@ -1,0 +1,33 @@
+---
+# tasks file for azure-cli
+- name: paquet prerequis
+  apt:
+    name:
+    - ca-certificates
+    - curl 
+    - apt-transport-https
+    - lsb-release 
+    - gnupg 
+
+- name: add key
+  apt_key:
+    url: https://deb.opera.com/archive.key
+    state: present
+
+- name: Create the APT repository (Debian)
+  apt_repository:
+    repo: "deb [arch=i386,amd64] https://deb.opera.com/opera-stable/ stable non-free"
+    filename: opera-browser
+    state: present
+
+- name: preconf opera install 
+  debconf:
+    name='opera-stable'
+    question='update opera source list'
+    vtype='boolean'
+    value='yes'
+
+- name: Install the application package
+  apt:
+    name: opera-stable
+    update_cache: yes

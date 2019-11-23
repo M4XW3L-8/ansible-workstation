@@ -1,0 +1,70 @@
+---
+- name: workstation install
+  connection: local
+  hosts: "{{ hosts | default('localhost') }}"
+  become: yes
+  vars:
+    dns: 1.1.1.1
+    virtualbox_version: "6.0"
+    vagrant_version: "2.2.6"
+    mattermost_version: "4.3.1"
+    helm_version: "3.0.0"
+    keepass_plugins:
+      - keepass2-plugin-tray-icon
+
+  pre_tasks:
+
+    - name: paquet prerequis
+      apt:
+        name:
+        - apt-utils 
+        - ca-certificates 
+        - vim 
+        - htop 
+        - tmux 
+        - git
+        - terminator
+        - xdotool 
+        - apt-transport-https 
+        - curl
+        - gnupg-agent 
+        - lsb-release 
+        - software-properties-common
+        - python3-pip
+        - nmap
+        - filezilla
+        - freerdp-x11
+        - remmina
+        - dnsutils
+        - openvpn
+        - redis-tools
+        - mysql-workbench
+        - yamllint
+        - dnsutils
+        - vlc
+        state: present
+        update_cache: yes
+
+            ########
+  roles:
+    - teebor_choka.keepass
+    - docker
+    - azure-cli
+    - google-chrome
+    - osbproject
+    - skype  
+    - sublime-text
+    - opera-browser
+    - discord
+    - spotify
+    - yq
+    - virtualbox
+    - vagrant
+    - mattermost
+    - kubectl
+    - podman
+    - wireshark
+    - helm
+    - molecule
+    - signal
+    - aws-cli

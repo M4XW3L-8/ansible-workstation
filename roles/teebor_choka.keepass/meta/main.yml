@@ -1,0 +1,27 @@
+---
+
+galaxy_info:
+  role_name: keepass
+  author: Tibor Csóka
+  description: |
+    "Establish Keepass safe password storage along with the plugins."
+  company: ""
+
+  license: MIT
+
+  min_ansible_version: 2.4
+
+  platforms:
+    - name: Ubuntu
+      versions:
+        - cosmic
+        - bionic
+        - xenial
+
+  galaxy_tags:
+    - keepass
+    - password
+    - keeagent
+    - kee
+
+dependencies: []

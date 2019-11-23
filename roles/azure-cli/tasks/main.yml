@@ -1,0 +1,26 @@
+---
+# tasks file for azure-cli
+- name: paquet prerequis
+  apt:
+    name:
+    - ca-certificates
+    - curl 
+    - apt-transport-https
+    - lsb-release 
+    - gnupg 
+
+- name: add key
+  apt_key:
+    url: https://packages.microsoft.com/keys/microsoft.asc
+    state: present
+
+- name: Create the APT repository (Debian)
+  apt_repository:
+    repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ansible_distribution_release}} main"
+    filename: az-cli
+    state: present
+
+- name: Install the application package
+  apt:
+    name: azure-cli
+    update_cache: yes

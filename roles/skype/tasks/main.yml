@@ -1,0 +1,17 @@
+---
+# tasks file for skype
+- name: add gpg key
+  apt_key:
+    url: https://repo.skype.com/data/SKYPE-GPG-KEY
+
+- name: add repo
+  apt_repository:
+    repo: deb [arch=amd64] https://repo.skype.com/deb stable main 
+    state: present
+    filename: skype
+
+- name: install skype
+  apt:
+    name: skypeforlinux
+    state: present
+    update_cache: yes

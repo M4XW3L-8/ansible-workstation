@@ -1,0 +1,27 @@
+---
+# tasks file for azure-cli
+- name: paquet prerequis
+  apt:
+    name:
+    - ca-certificates
+    - curl 
+    - apt-transport-https
+    - lsb-release 
+    - gnupg 
+
+- name: add key
+  apt_key:
+    url: https://download.spotify.com/debian/pubkey.gpg
+    state: present
+
+- name: Create the APT repository 
+  apt_repository:
+    repo: "deb [arch=amd64] http://repository.spotify.com stable non-free "
+    filename: spotify
+    state: present
+
+- name: Install the application package
+  apt:
+    name: spotify-client
+    state: present
+    update_cache: yes
