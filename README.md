@@ -5,6 +5,9 @@ After install Ansible ;)
 
 
 Only for ubuntu like 
+########
+#Bug with keepass2 role
+#########
  
 Playbook workstation content:  
 -----------------------------------
