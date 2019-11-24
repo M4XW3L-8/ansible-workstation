@@ -95,7 +95,7 @@ ansible-playbook playbooks/workstation.yml -i inventory/vagrant.yml  --extra-var
 
 On your desktop:
 ```
-ansible-playbook playbooks/workstation.yml 
+ansible-playbook -K playbooks/workstation.yml 
 ```
 
 
