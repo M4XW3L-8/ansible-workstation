@@ -6,8 +6,8 @@ After install Ansible ;)
 
 Only for ubuntu like 
 ########
-#Bug with keepass2 role
-#########
+# Tested on Ubuntu bionic / Linux Mint Tina
+##########
  
 Playbook workstation content:  
 -----------------------------------
