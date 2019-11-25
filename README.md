@@ -8,7 +8,7 @@ After install Ansible ;)
 
 ################################
 ### Tested on Ubuntu bionic / Linux Mint Tina
-########################################
+#######################################
  
 Playbook workstation content:  
 -----------------------------------
