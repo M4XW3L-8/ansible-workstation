@@ -17,8 +17,18 @@
 - name: Create the APT repository (Debian)
   apt_repository:
     repo: "deb [arch=amd64] https://packages.microsoft.com/repos/azure-cli/ {{ansible_distribution_release}} main"
-    filename: az-cli
+    filename: azure-cli
     state: present
+  when:
+    - ansible_distribution == "Debian" or ansible_distribution == "Ubuntu"
+
+- name: Create the APT repository (Debian)
+  apt_repository:
+    repo: "{{ azcli_repo_ubuntu }}"
+    filename: azure-cli
+    state: present
+  when:
+    - ansible_distribution != "Debian" or ansible_distribution != "Ubuntu"
 
 - name: Install the application package
   apt:

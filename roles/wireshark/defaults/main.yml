@@ -1,0 +1,3 @@
+---
+# defaults file for wireshark
+wireshark_repo_ubuntu: "deb [arch=amd64] http://ppa.launchpad.net/wireshark-dev/stable/ubuntu bionic main"

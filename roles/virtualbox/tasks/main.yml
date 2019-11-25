@@ -11,7 +11,7 @@
 
 - name: add repo
   apt_repository:
-    repo: "deb http://download.virtualbox.org/virtualbox/debian {{ ansible_distribution_release }} contrib"
+    repo: "{{ virtualbox_repo_ubuntu }}"
     state: present
     filename: virtualbox
 

@@ -1,2 +1,3 @@
 ---
 # defaults file for osbproject
+obs_ubuntu_repo: "deb http://ppa.launchpad.net/obsproject/obs-studio/ubuntu bionic main"

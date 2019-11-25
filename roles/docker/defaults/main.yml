@@ -1,3 +1,4 @@
 ---
 # defaults file for docker
 docker_path_data: "/data/docker"
+repo_docker_ubuntu: "deb [arch=amd64] https://download.docker.com/linux/ubuntu bionic stable"

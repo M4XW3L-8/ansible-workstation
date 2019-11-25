@@ -3,6 +3,14 @@
 - name: add ppa 
   apt_repository:
     repo: ppa:obsproject/obs-studio
+  when: ansible_distribution == "Ubuntu"
+
+- name: add repo
+  apt_repository:
+    repo: "{{ obs_ubuntu_repo }}"
+    state: present
+    filename: obsproject-obs-studio-bionic 
+  when: ansible_distribution != "Ubuntu"
 
 - name: Install obs-studio
   apt:

@@ -38,7 +38,17 @@
     repo: deb [arch=amd64] https://download.docker.com/linux/{{ ansible_distribution|lower }} {{ ansible_distribution_release }} stable
     state: present
     filename: docker
+  when:
+    - ansible_distribution == 'Ubuntu' or ansible_distribution == 'Debian'
 
+- name: add repos docker
+  apt_repository:
+    repo: "{{ repo_docker_ubuntu }}"
+    state: present
+    filename: docker
+  when:
+    - ansible_distribution == 'Linux Mint'
+   
 - name: paquet docker
   apt:
     name: "{{ packages }}"

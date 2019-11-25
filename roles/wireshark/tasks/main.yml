@@ -1,0 +1,34 @@
+---
+# tasks file for wireshark
+- name: add repo 
+  apt_repository:
+    repo:  ppa:wireshark-dev/stable
+    state: present
+    filename: wireshark
+  when: ansible_distribution == "Ubuntu"
+
+- name: add repo
+  apt_repository:
+    repo: "{{ wireshark_repo_ubuntu }}"
+    state: present
+    filename: wireshark
+  when: ansible_distribution != "Ubuntu"
+
+- name: let non root to capture traffic
+  # Before installing any package, this only sets the preference for the question
+  debconf:
+    name='wireshark-common'
+    question='wireshark-common/install-setuid'
+    vtype='boolean'
+    value='true'
+- name: install wireshark
+  apt: 
+    name: wireshark 
+    state: present
+    update_cache: yes
+
+- name: add current user to wireshark group
+  user:
+    name: "{{ ansible_user_id }}"
+    append: yes
+    groups: wireshark

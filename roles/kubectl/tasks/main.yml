@@ -1,0 +1,24 @@
+---
+# tasks file for kubectl
+- name: Add GPG key for kubectl
+  apt_key:
+    url: https://packages.cloud.google.com/apt/doc/apt-key.gpg
+    state: present
+  tags:
+    - kubectl
+
+- name: add source kubectl
+  apt_repository:
+     repo : "{{ kubectl_repo_debian }}"
+     filename: kubectl
+     state: present
+  tags:
+    - kubectl
+
+- name: paquet kubectl
+  apt:
+    name: kubectl 
+    state: present
+    update_cache: yes
+  tags:
+    - kubectl

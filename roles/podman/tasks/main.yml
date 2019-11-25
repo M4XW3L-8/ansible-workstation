@@ -1,0 +1,26 @@
+---
+# tasks file for podman
+
+- name: add podman ppa
+  apt_repository:
+    repo: ppa:projectatomic/ppa
+    filename: projectatomic-ppa-bionic
+  when: ansible_distribution == "Ubuntu" 
+
+- name: add podman ppa
+  apt_repository:
+    repo: "{{ podman_repo_ubuntu }}"
+    filename: projectatomic-ppa-bionic
+  when: ansible_distribution != "Ubuntu" 
+    
+- name: install podman packages
+  apt:
+    name:
+      - uidmap      
+      - podman
+      - buildah
+      - skopeo
+        #      - podman-docker
+    state: present
+    update_cache: yes
+

@@ -4,4 +4,9 @@
   pip:
     name:  molecule
     state: present
-
+    extra_args: --ignore-installed
+  register: molecule_install
+  until: molecule_install is succeeded
+  retries: 3
+  tags:
+    - molecule

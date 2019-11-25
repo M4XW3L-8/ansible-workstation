@@ -1,0 +1,3 @@
+---
+# defaults file for podman
+podman_repo_ubuntu: "deb http://ppa.launchpad.net/projectatomic/ppa/ubuntu bionic main" 

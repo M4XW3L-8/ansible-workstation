@@ -4,21 +4,31 @@
   when: ansible_distribution == 'Ubuntu'
   become: true
   apt_repository:
-    repo: 'ppa:jtaylor/keepass'
+    repo: ppa:jtaylor/keepass2
     filename: keepass
     state: present
 
 - name: establish keepass plugin repo
   when:
-    - ansible_distribution == 'Ubuntu'
+    - ansible_distribution == 'Ubuntu'  
     - keepass_plugins is defined
     - keepass_plugins | length > 0
   become: true
   apt_repository:
-    repo: 'ppa:dlech/keepass2-plugins'
+    repo: ppa:dlech/keepass2-plugins
     filename: keepass-plugins
     state: present
 
+- name: add repo
+  when:
+    - ansible_distribution == 'Linux Mint'
+    - keepass_plugins is defined
+    - keepass_plugins | length > 0
+  apt_repository:
+    repo: deb http://ppa.launchpad.net/dlech/keepass2-plugins/ubuntu bionic main  
+    filename: keepass-plugin 
+    state: present
+    
 - name: establish keepass repo
   when:
     - ansible_distribution == 'Debian'
