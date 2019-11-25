@@ -8,7 +8,7 @@ Only for ubuntu like
 
 ######################
 ### Tested on Ubuntu bionic / Linux Mint Tina
-##########################################
+########################################
  
 Playbook workstation content:  
 -----------------------------------
