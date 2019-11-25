@@ -6,9 +6,9 @@ After install Ansible ;)
 
 !!!Only for ubuntu like  !!!
 
-################################
-### Tested on Ubuntu bionic / Linux Mint Tina
-#######################################
+###############################
+## Tested on Ubuntu bionic / Linux Mint Tina
+######################################
  
 Playbook workstation content:  
 -----------------------------------
