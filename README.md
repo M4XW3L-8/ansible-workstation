@@ -110,3 +110,10 @@ Test with vagrant (cf inventory):
 vagrant init ubuntu/bionic64
 vagrant up
 ```
+
+A ajouter:  
+-----------
+
+- keepassXC
+- sealed-secrets :doc(https://github.com/bitnami-labs/sealed-secrets/releases)
+- 
