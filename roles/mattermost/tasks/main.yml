@@ -1,0 +1,7 @@
+---
+# tasks file for mattermost
+- name: install Debian packages
+  apt:
+    deb: "{{ item }}"
+  loop: "{{ mattermost_packages}}"
+

@@ -1,0 +1,5 @@
+---
+# defaults file for mattermost
+mattermost_version: "4.3.1"
+mattermost_packages: 
+  - "https://github.com/mattermost/desktop/releases/download/v{{ mattermost_version }}/mattermost-desktop-{{ mattermost_version }}-linux-amd64.deb"
