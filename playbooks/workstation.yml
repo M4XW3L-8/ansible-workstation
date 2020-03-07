@@ -68,3 +68,4 @@
     - molecule
     - signal
     - aws-cli
+    - vscodium

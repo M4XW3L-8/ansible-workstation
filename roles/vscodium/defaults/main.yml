@@ -1,0 +1,9 @@
+---
+# defaults file for vscodium
+packages:
+  - "ca-certificates"
+  - "curl"
+  - "apt-transport-https"
+  - "lsb-release"
+  - "gnupg"
+  

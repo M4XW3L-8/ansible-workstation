@@ -1,0 +1,23 @@
+---
+# tasks file for vscodium
+
+- name: paquet prerequis
+  apt:
+    pkg: "{{ packages }}"
+    state: present
+
+- name: add key
+  apt_key:
+    url: https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/master/pub.gpg
+    state: present
+
+- name: Create the APT repository (Debian)
+  apt_repository:
+    repo: "deb [arch=amd64] https://gitlab.com/paulcarroty/vscodium-deb-rpm-repo/raw/repos/debs/ vscodium main"
+    filename: vscodium
+    state: present
+
+- name: Install the application package
+  apt:
+    name: codium
+    update_cache: yes
