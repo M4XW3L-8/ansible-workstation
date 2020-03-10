@@ -25,6 +25,7 @@
         - git
         - terminator
         - xdotool 
+        - xclip
         - apt-transport-https 
         - curl
         - gnupg-agent 
@@ -42,6 +43,8 @@
         - yamllint
         - dnsutils
         - vlc
+        - python-jmespath
+        - python-netaddr
         state: present
         update_cache: yes
 
