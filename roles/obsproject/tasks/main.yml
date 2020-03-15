@@ -1,8 +1,15 @@
 ---
 # tasks file for osbproject
+- name: add key
+  apt_key:
+    id: EFC71127F425E228 
+    keyserver: keyserver.ubuntu.com
+    state: present
+  
 - name: add ppa 
   apt_repository:
     repo: ppa:obsproject/obs-studio
+    filename: obsproject
   when: ansible_distribution == "Ubuntu"
 
 - name: add repo
@@ -10,7 +17,7 @@
     repo: "{{ obs_ubuntu_repo }}"
     state: present
     filename: obsproject-obs-studio-bionic 
-  when: ansible_distribution != "Ubuntu"
+  when: ansible_distribution == "Linux Mint"
 
 - name: Install obs-studio
   apt:

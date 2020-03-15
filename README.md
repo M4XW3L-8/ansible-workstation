@@ -126,5 +126,4 @@ A corriger:
 keepass
 obsprojetct 
 podman
-wireshark 
 moleculle
