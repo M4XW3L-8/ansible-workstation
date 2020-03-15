@@ -1,0 +1,9 @@
+---
+- name: role  install
+  connection: local
+  hosts: "{{ hosts | default('localhost') }}"
+  become: yes
+  vars:
+  pre_tasks:
+  roles:
+    - "{{ monrole }}"

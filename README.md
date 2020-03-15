@@ -118,3 +118,13 @@ A ajouter:
 - sealed-secrets :doc(https://github.com/bitnami-labs/sealed-secrets/releases)
 - Regarder BitWarden
 -https://pdfgrep.org/
+
+
+A corriger:
+---------------
+
+keepass
+obsprojetct 
+podman
+wireshark 
+moleculle
