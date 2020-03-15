@@ -124,6 +124,4 @@ A corriger:
 ---------------
 
 keepass
-obsprojetct 
 podman
-moleculle
