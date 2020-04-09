@@ -45,6 +45,7 @@
         - vlc
         - python-jmespath
         - python-netaddr
+        - tree
         state: present
         update_cache: yes
 
